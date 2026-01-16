@@ -1,0 +1,15 @@
+[project]
+name = "sygnalista-reporter"
+version = "0.1.0"
+description = "Minimalny klient do wysyłania zgłoszeń (issue) do sygnalista Cloudflare Worker."
+requires-python = ">=3.10"
+readme = "README.md"
+license = { text = "UNLICENSED" }
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["sygnalista_reporter"]
+

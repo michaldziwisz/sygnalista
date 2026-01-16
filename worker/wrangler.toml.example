@@ -1,0 +1,22 @@
+name = "sygnalista"
+main = "src/index.ts"
+compatibility_date = "2026-01-01"
+
+# ---- Required vars/secrets (see README in repo root) ----
+# vars:
+#   APP_REPO_MAP='{"sara":"michaldziwisz/sara","programista":"michaldziwisz/programista"}'
+#   INTAKE_REPO="michaldziwisz/support-intake"
+#   INTAKE_BRANCH="main"
+#   RATE_LIMIT_PER_MINUTE="6"
+#   MAX_LOG_BASE64_LENGTH="8000000"
+#
+# secrets:
+#   Either:
+#     - GITHUB_TOKEN   (fine-grained PAT recommended)
+#   Or:
+#     - GITHUB_APP_ID
+#     - GITHUB_APP_PRIVATE_KEY
+#     - GITHUB_APP_INSTALLATION_ID
+#
+# optional secrets:
+#   APP_TOKEN_MAP='{"sara":"<random>","programista":"<random>"}'

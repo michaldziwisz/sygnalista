@@ -1,0 +1,17 @@
+# Node
+worker/node_modules/
+worker/.wrangler/
+worker/npm-debug.log*
+
+# Wrangler local secrets
+worker/.dev.vars
+worker/wrangler.toml
+
+# Python
+python/.venv/
+python/__pycache__/
+python/**/*.pyc
+python/*.egg-info/
+python/dist/
+python/build/
+
