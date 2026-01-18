@@ -4,6 +4,7 @@
 
 - Desktop app wysyła formularz + diagnostykę + (opcjonalnie) logi do Cloudflare Workera.
 - Worker tworzy issue w odpowiednim repozytorium na GitHub.
+- (Opcjonalnie) Worker wysyła powiadomienie na Telegram po utworzeniu issue.
 - Pełny payload + logi trafiają do prywatnego repo `support-intake`, a publiczne issue zawiera linki do tych plików.
 
 ## Struktura

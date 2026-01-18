@@ -3,6 +3,7 @@ import { getGitHubClient } from "./github.js";
 import { rateLimit } from "./rateLimit.js";
 import { badRequest, internalError, unauthorized } from "./response.js";
 import { parseReportRequest, renderIssueBody, sanitizeFileName } from "./schema.js";
+import { sendTelegramIssueNotification } from "./telegram.js";
 
 function parseJsonObject(text: string): unknown {
   try {
@@ -37,7 +38,11 @@ function getAppRepo(env: Env, appId: string): { owner: string; repo: string } | 
   return parseRepo(repoRef);
 }
 
-export async function handleReport(request: Request, env: Env): Promise<Response> {
+export async function handleReport(
+  request: Request,
+  env: Env,
+  ctx?: { waitUntil(promise: Promise<unknown>): void }
+): Promise<Response> {
   const rl = await rateLimit(request, env);
   if (rl) return rl;
 
@@ -148,6 +153,20 @@ export async function handleReport(request: Request, env: Env): Promise<Response
       body: issueBody,
       labels
     });
+
+    const notifyPromise = sendTelegramIssueNotification({
+      env,
+      appRepo,
+      reportId,
+      receivedAtIso,
+      report,
+      issue: issueResult
+    }).catch((err: unknown) => {
+      // Best-effort; issue creation must succeed even if Telegram fails.
+      console.warn("Telegram notification failed", err);
+    });
+    if (ctx) ctx.waitUntil(notifyPromise);
+    else await notifyPromise;
 
     return new Response(
       JSON.stringify(

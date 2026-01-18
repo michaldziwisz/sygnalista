@@ -7,6 +7,7 @@ compatibility_date = "2026-01-01"
 #   APP_REPO_MAP='{"sara":"michaldziwisz/sara","programista":"michaldziwisz/programista"}'
 #   INTAKE_REPO="michaldziwisz/support-intake"
 #   INTAKE_BRANCH="main"
+#   TELEGRAM_CHAT_ID="123456789"  # twoj chat_id (liczba) lub np. "@twoj_kanal"
 #   RATE_LIMIT_PER_MINUTE="6"
 #   MAX_LOG_BASE64_LENGTH="8000000"
 #
@@ -20,3 +21,4 @@ compatibility_date = "2026-01-01"
 #
 # optional secrets:
 #   APP_TOKEN_MAP='{"sara":"<random>","programista":"<random>"}'
+#   TELEGRAM_BOT_TOKEN

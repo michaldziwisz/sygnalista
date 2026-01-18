@@ -13,12 +13,19 @@ export interface Env {
 
   APP_TOKEN_MAP?: string;
 
+  TELEGRAM_BOT_TOKEN?: string;
+  TELEGRAM_CHAT_ID?: string;
+
   RATE_LIMIT_PER_MINUTE?: string;
   MAX_LOG_BASE64_LENGTH?: string;
 }
 
 export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
+  async fetch(
+    request: Request,
+    env: Env,
+    ctx?: { waitUntil(promise: Promise<unknown>): void }
+  ): Promise<Response> {
     if (request.method === "OPTIONS") return withCors(new Response(null, { status: 204 }), request);
 
     const url = new URL(request.url);
@@ -28,7 +35,7 @@ export default {
 
     if (url.pathname === "/v1/report") {
       if (request.method !== "POST") return withCors(methodNotAllowed(["POST"]), request);
-      return withCors(await handleReport(request, env), request);
+      return withCors(await handleReport(request, env, ctx), request);
     }
 
     return withCors(notFound(), request);

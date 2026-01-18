@@ -21,6 +21,10 @@ Opcjonalnie:
 - `APP_TOKEN_MAP` – JSON (sekret): `{"sara":"<losowy-token>","programista":"<losowy-token>"}`
   - Jeśli ustawisz, aplikacja musi wysyłać nagłówek `x-sygnalista-app-token`.
   - Tokeny możesz wygenerować: `python3 scripts/generate_app_tokens.py sara programista`
+- `TELEGRAM_CHAT_ID` – chat ID lub nazwa kanału (np. `123456789` albo `@twoj_kanal`)
+  - Jeśli ustawisz razem z `TELEGRAM_BOT_TOKEN`, Worker będzie wysyłał powiadomienie na Telegram po utworzeniu issue.
+  - To ma być ID Twojego czatu (np. z `message.chat.id`), a nie `@username` ani ID bota.
+- `TELEGRAM_BOT_TOKEN` – token bota (sekret)
 - `RATE_LIMIT_PER_MINUTE` – domyślnie `6`
 - `MAX_LOG_BASE64_LENGTH` – domyślnie `8000000` (limit dla `logs.dataBase64`)
 
@@ -56,6 +60,24 @@ Uprawnienia App:
 
 Po utworzeniu App zainstaluj ją na repozytoriach aplikacji (tam gdzie mają powstawać issues) oraz na `support-intake`.
 
+## 2a) (Opcjonalnie) Powiadomienia na Telegram
+
+1) Utwórz bota w `@BotFather` i skopiuj token.
+2) Ustaw sekrety/zmienne w Workerze:
+
+```bash
+wrangler secret put TELEGRAM_BOT_TOKEN
+# a TELEGRAM_CHAT_ID jako var (wrangler.toml) albo też jako sekret:
+wrangler secret put TELEGRAM_CHAT_ID
+```
+
+Żeby znaleźć `chat_id`:
+
+- Napisz do bota (w prywatnym czacie lub dodaj go do grupy), a potem wywołaj:
+  - `curl -sS "https://api.telegram.org/bot<TOKEN>/getUpdates"`
+  - w odpowiedzi szukaj pola `message.chat.id`.
+  - Jeśli widzisz błąd `403 Forbidden: bots can't send messages to bots`, to znaczy że ustawione jest ID bota, nie Twoje.
+
 ## 3) Deploy Workera
 
 ```bash
@@ -67,6 +89,8 @@ wrangler login
 wrangler secret put GITHUB_TOKEN
 # opcjonalnie:
 # wrangler secret put APP_TOKEN_MAP
+# wrangler secret put TELEGRAM_BOT_TOKEN
+# wrangler secret put TELEGRAM_CHAT_ID
 wrangler deploy
 ```
 
