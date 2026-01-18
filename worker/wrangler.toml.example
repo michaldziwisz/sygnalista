@@ -4,7 +4,7 @@ compatibility_date = "2026-01-01"
 
 # ---- Required vars/secrets (see README in repo root) ----
 # vars:
-#   APP_REPO_MAP='{"sara":"michaldziwisz/sara","programista":"michaldziwisz/programista"}'
+#   APP_REPO_MAP='{"sara":"michaldziwisz/sara","programista":"michaldziwisz/programista","shaqgui":"michaldziwisz/shaq-gui-tools","shaqfilegui":"michaldziwisz/shaq-gui-tools","shaqcast":"michaldziwisz/shaq-gui-tools"}'
 #   INTAKE_REPO="michaldziwisz/support-intake"
 #   INTAKE_BRANCH="main"
 #   TELEGRAM_CHAT_ID="123456789"  # twoj chat_id (liczba) lub np. "@twoj_kanal"
